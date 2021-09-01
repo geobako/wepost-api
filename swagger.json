@@ -1,0 +1,497 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Pet api for mobile app",
+        "version": "1.0.0",
+        "title": "Pet app",
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "host": "petstore.swagger.io",
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Authentication routes"
+        },
+        {
+            "name": "Profile",
+            "description": "Profile routes"
+        },
+        {
+            "name": "Rate",
+            "description": "Rate routes"
+        },
+        {
+            "name": "Map",
+            "description": "Map routes"
+        },
+        {
+            "name": "Upload",
+            "description": "Upload routes"
+        }
+    ],
+    "schemes": ["https", "http"],
+    "paths": {
+        "/auth/register": {
+            "post": {
+                "tags": ["Auth"],
+                "summary": "Register user into the system",
+                "description": "",
+                "operationId": "registerUser",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "register user body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/userAuth"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": ["Auth"],
+                "summary": "Logs user into the system",
+                "description": "",
+                "operationId": "loginUser",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "register user body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/userAuth"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            }
+        },
+        "/profile": {
+            "get": {
+                "tags": ["Profile"],
+                "summary": "Get user profile info",
+                "description": "",
+                "operationId": "getUserProfile",
+                "produces": ["application/json"],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Profile"],
+                "summary": "Update user profile info",
+                "description": "",
+                "operationId": "updateUserProfile",
+                "produces": ["application/json"],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/UserUpdateBody"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            }
+        },
+
+        "/get-images": {
+            "get": {
+                "tags": ["Rate"],
+                "summary": "Get users photos to rate",
+                "description": "",
+                "operationId": "getImages",
+                "produces": ["application/json"],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/ImagesResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            }
+        },
+        "/rate-image": {
+            "post": {
+                "tags": ["Rate"],
+                "summary": "Rate an image",
+                "description": "",
+                "operationId": "rateImage",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Expecting the rate and the id of the person who is rated",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/RateImageBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            }
+        },
+        "/report-image": {
+            "post": {
+                "tags": ["Rate"],
+                "summary": "Report an image",
+                "description": "",
+                "operationId": "reportImage",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Expecting the reason and the id of the person who is reported",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ReportImageBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            }
+        },
+        "/get-top-ten": {
+            "get": {
+                "tags": ["Rate"],
+                "summary": "Get top 10 users by rating",
+                "description": "",
+                "operationId": "gettop10",
+                "produces": ["application/json"],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/TopTenResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            }
+        },
+        "/map/location": {
+            "put": {
+                "tags": ["Map"],
+                "summary": "Update users location",
+                "description": "",
+                "operationId": "updateLocation",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "register user body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/updateLocationBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            }
+        },
+        "/map/nearby": {
+            "get": {
+                "tags": ["Map"],
+                "summary": "Get nearby users",
+                "description": "",
+                "operationId": "nearbyUsers",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            }
+        },
+        "/upload-profile-photo": {
+            "post": {
+                "tags": ["Upload"],
+                "summary": "uploads profile photo",
+                "description": "",
+                "operationId": "uploadProfilePhoto",
+                "consumes": ["multipart/form-data"],
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "image",
+                        "in": "formData",
+                        "description": "Image to upload",
+                        "required": false,
+                        "type": "image"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+
+    "definitions": {
+        "User": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "mobileToken": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "surname": {
+                    "type": "string"
+                },
+                "petName": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "petSex": {
+                    "type": "string"
+                },
+                "petAge": {
+                    "type": "integer"
+                },
+                "imageUrl": {
+                    "type": "string"
+                },
+                "plan": {
+                    "type": "string"
+                },
+                "rate": {
+                    "type": "number"
+                },
+                "reviewers": {
+                    "type": "number"
+                },
+                "hasReachedDailyLimit": {
+                    "type": "boolean"
+                },
+                "ratedUers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "location": {
+                    "type": "object"
+                }
+            }
+        },
+        "UserUpdateBody": {
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "mobileToken": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "surname": {
+                    "type": "string"
+                },
+                "petName": {
+                    "type": "string"
+                },
+                "petSex": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "petAge": {
+                    "type": "integer"
+                },
+                "location": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        "userAuth": {
+            "type": "object",
+            "required": ["email", "password"],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "example": "aa@aa.com"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "updateLocationBody": {
+            "type": "object",
+            "required": ["coordinates"],
+            "properties": {
+                "coordinates": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        "RateImageBody": {
+            "type": "object",
+            "properties": {
+                "ratedUserId": { "type": "string" },
+                "rate": { "type": "integer" }
+            }
+        },
+        "TopTenResponse": {
+            "type": "object",
+            "properties": {
+                "_id": { "type": "string" },
+                "rate": { "type": "integer" },
+                "reviewers": { "type": "integer" },
+                "currentRate": { "type": "integer" }
+            }
+        },
+        "ReportImageBody": {
+            "type": "object",
+            "properties": {
+                "reportedUserId": { "type": "string" },
+                "reason": { "type": "integer" }
+            }
+        },
+        "ImagesResponse": {
+            "type": "object",
+            "properties": {
+                "users": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "_id": { "type": "string" },
+                            "petName": { "type": "string" },
+                            "petSex": { "type": "string" },
+                            "petAge": { "type": "string" },
+                            "imageUrl": { "type": "string" }
+                        }
+                    }
+                }
+            }
+        },
+        "ApiResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
