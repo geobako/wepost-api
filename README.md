@@ -1,37 +1,25 @@
-# Pet app Api
+# We post Api
 
 ## Description
 
-Rest api for pet's mobile app
+Api for we post
 
-## Usage
-
-### Download google keys.json for access to google cloud storage
-
-Download and place in the root of project storage-key-dev.json for development and storage-key.json for production
 
 #### Clone repo and run
 
 ```
-npm install
+yarn
 ```
 
-Make a `.env` file according to `.example.env` and add your own variales if you like
+Leave `.env` as it is or change with your own values. Database access is public in mongo atlas cloud
 Then run :
 
 ```
-npm run dev
+yarn dev
 ```
 
 ## Development tips
 
--   #### Do not forget to checkout to dev branch and create another branch base on dev before adding a new feature
-
-```diff
-- DO NOT MAKE CHANGES OR PUSH TO THE MASTER OR DEV BRANCH DIRECTLY
-```
-
--   #### Always update `swagger.json` after making changes to any routes
 -   #### Always use the custom error handler to handle errors. For Example:
 
 ```Javascript
