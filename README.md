@@ -17,6 +17,9 @@ Then run :
 ```
 yarn dev
 ```
+## Docs
+To see the api docs , after running the server go to [http://localhost:5001/docs](http://localhost:5001/docs) 
+
 
 ## Development tips
 
