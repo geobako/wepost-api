@@ -16,7 +16,7 @@
             "description": "Authentication routes"
         },
         {
-            "name": "Article",
+            "name": "Articles",
             "description": "Articles routes"
         }
     ],
@@ -187,7 +187,7 @@
                 }
             }
         },
-      
+
         "userLogin": {
             "type": "object",
             "required": ["email", "password"],
