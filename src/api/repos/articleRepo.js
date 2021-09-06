@@ -11,17 +11,14 @@ const createArticle = async ({ title, subTitle, description, id }) => {
     return newArticle;
 };
 
-const getArticle= async (id, user) => {
-
-    
-
-    let article = await  Article.findById(id)
+const getArticle = async (id, user) => {
+    let article = await Article.findById(id)
         .populate('creator')
         .lean();
 
-        if(user.id !== article.creator){
-            article = await Article.findByIdAndUpdate(id,{views: article.views+1}).lean()
-        }
+    if (user.id !== article.creator) {
+        article = await Article.findByIdAndUpdate(id, { views: article.views + 1 }).lean();
+    }
 
     return article;
 };
@@ -50,22 +47,23 @@ const getArticles = async ({ skip, limit, creatorId }) => {
                 title: 1,
                 subtitle: 1,
                 description: 1,
+                createdAt: 1,
                 views: 1,
                 'creator._id': 1,
                 'creator.name': 1,
-                'creator.surname': 1,
+                'creator.surname': 1
             }
         }
-    ]
+    ];
 
-    if(creatorId){
-        pipeline = [ { $match: { creator: creatorId } },...pipeline]
+    if (creatorId) {
+        pipeline = [{ $match: { creator: creatorId } }, ...pipeline];
     }
 
     const articles = await Article.aggregate(pipeline);
 
     return { articles, totalPages };
-}
+};
 
 module.exports = {
     createArticle,
