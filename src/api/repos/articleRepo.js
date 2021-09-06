@@ -11,14 +11,12 @@ const createArticle = async ({ title, subTitle, description, id }) => {
     return newArticle;
 };
 
-const getArticle = async (id, user) => {
+const getArticle = async id => {
     let article = await Article.findById(id)
         .populate('creator')
         .lean();
 
-    if (user.id !== article.creator) {
-        article = await Article.findByIdAndUpdate(id, { views: article.views + 1 }).lean();
-    }
+    article = await Article.findByIdAndUpdate(id, { views: article.views + 1 }).lean();
 
     return article;
 };

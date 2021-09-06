@@ -6,12 +6,10 @@ exports.createArticle = async (req, res, next) => {
     try {
         const { user } = req;
         const { id } = user;
-        const { title,subTitle, description } = req.body;
+        const { title, subTitle, description } = req.body;
 
-       
-
-        const article = await articleRepo.createArticle({ title,subTitle, description ,id});
-        const response = new ResponseHandler(httpStatus.OK,{article});
+        const article = await articleRepo.createArticle({ title, subTitle, description, id });
+        const response = new ResponseHandler(httpStatus.OK, { article });
         return res.status(httpStatus.OK).json(response);
     } catch (error) {
         next(error);
@@ -20,10 +18,9 @@ exports.createArticle = async (req, res, next) => {
 
 exports.getArticle = async (req, res, next) => {
     try {
-         const { user } = req;
         const { id } = req.params;
 
-        let article = await articleRepo.getArticle(id, user);
+        let article = await articleRepo.getArticle(id);
         const response = new ResponseHandler(httpStatus.OK, { article });
         return res.status(httpStatus.OK).json(response);
     } catch (error) {
