@@ -29,9 +29,10 @@ const getArticles = async ({ skip, limit, creatorId }) => {
     const totalPages = Math.ceil(total);
 
     const pipeline = [
+        { $sort: { createdAt: -1 } },
         { $skip: skip },
         { $limit: limit },
-        { $sort: { createdAt: -1 } },
+
         {
             $lookup: {
                 from: 'users',
